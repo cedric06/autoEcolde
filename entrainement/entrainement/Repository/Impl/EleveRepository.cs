@@ -16,7 +16,7 @@ namespace entrainement.Repository.Impl
 
         public IQueryable<Eleves> FindAll()
         {
-            return this.context.Eleves.Select(Eleves => eleve);
+            return  this.context.Eleves.Select(eleve => eleve);
         }
 
         public IQueryable<Eleves> Filter(EleveRepository model)

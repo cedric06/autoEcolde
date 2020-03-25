@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace entrainement.Repository
 {
-    public class CrudSQLRepository<T> : CrudRepository<T> where T : class
+    public class CrudSQLRepository<T> : CrudRepository<T> where T : Model
     {
-        private bddautoecoleContext context = null;
+        protected bddautoecoleContext context = null;
         private DbSet<T> table = null;
         public CrudSQLRepository(bddautoecoleContext context)
         {
@@ -21,12 +21,6 @@ namespace entrainement.Repository
             throw new NotImplementedException();
         }
 
-        public IQueryable<Adresse> FindAll()
-        {
-            // SELECT * FROM chercheur;
-            return this.context.Adresse;
-        }
-
         public IQueryable<T> FindAll()
         {
             return this.table;
@@ -34,7 +28,7 @@ namespace entrainement.Repository
 
         public T FindByID(int id)
         {
-            return this.table.Where(model => model.Id == id);
+            return this.table.Where(model => model.Id == id).First();
         }
 
         public void Remove(int id)
@@ -52,3 +46,4 @@ namespace entrainement.Repository
             throw new NotImplementedException();
         }
     }
+}
