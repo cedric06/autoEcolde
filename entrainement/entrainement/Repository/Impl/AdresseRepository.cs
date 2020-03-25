@@ -17,7 +17,7 @@ namespace entrainement.Repository
         public IQueryable<Adresse> FindAll()
         {
             //SELECT * FROM chercheur;
-            return this.context.Adresse.Select(AdresseRepository => adresse);
+            return this.context.Adresse;
         }
 
         public IQueryable<Adresse> Filter(AdresseRepository model)
@@ -27,22 +27,31 @@ namespace entrainement.Repository
 
         public Adresse FindByID(int id)
         {
-            throw new NotImplementedException();
+            // SELECT * FROM chercheur WHERE Id==id LIMIT 1;
+            return this.context.Adresse
+                .Where(adresse => adresse.Id == id)
+                .First();
         }
 
-        public IQueryable<Adresse> Remove(int id)
+        public void Remove(int id)
         {
-            throw new NotImplementedException();
+            // DELETE chercheur where ID = id;
+            this.context.Remove(this.FindByID(id));
+            this.context.SaveChanges();
         }
 
         public Adresse Save(Adresse model)
         {
-            throw new NotImplementedException();
+            // INSERT INTO chercheur (nom, ...) VALUE (..., ..., ...)
+            this.context.Add(model);
+            this.context.SaveChanges();
         }
 
         public Adresse Update(Adresse model)
         {
-            throw new NotImplementedException();
+            // UPDATE chercheur SET nom=model.nom, prenom=model.prenom WHERE ID = model.id;
+            this.context.Update(model);
+            this.context.SaveChanges();
         }
     }
 }
