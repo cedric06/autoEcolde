@@ -9,7 +9,7 @@ namespace entrainement.Repository
 {
     public class CrudSQLRepository<T> : CrudRepository<T> where T : Model
     {
-        protected bddautoecoleContext context = null;
+        private bddautoecoleContext context = null;
         private DbSet<T> table = null;
         public CrudSQLRepository(bddautoecoleContext context)
         {
